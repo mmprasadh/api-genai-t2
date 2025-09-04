@@ -20,7 +20,7 @@ echo "Creating resource group: $RG"
 az group create -n "$RG" -l "$LOC" >/dev/null
 
 echo "Creating Key Vault: $KV"
-if ! az keyvault show -g "$RG" -n "$KV" >/devnull 2>&1; then
+if ! az keyvault show -g "$RG" -n "$KV" >/dev/null 2>&1; then  # FIXED: was /devnull
   az keyvault create -g "$RG" -n "$KV" -l "$LOC" >/dev/null
 fi
 
@@ -76,4 +76,4 @@ fi
 echo "Creating APIM (Developer SKU): $APIM"
 az apim show -g "$RG" -n "$APIM" >/dev/null 2>&1 || az apim create -g "$RG" -n "$APIM" --publisher-email you@example.com --publisher-name "You" --sku-name Developer >/dev/null
 
-echo "✅ Provisioned resources.")
+echo "✅ Provisioned resources."
